@@ -1,7 +1,7 @@
 <?php include_once 'header.php'; ?><!-- log on to codeastro.com for more projects -->
 <?php include_once 'footer.php';
 require '../helpers/init_conn_db.php';?>
-<style><!-- log on to codeastro.com for more projects -->
+<style> 
 table {
   background-color: white;
 }

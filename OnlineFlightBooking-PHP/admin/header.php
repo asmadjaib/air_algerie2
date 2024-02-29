@@ -62,16 +62,23 @@ button.btn-outline-light:hover {
                       <h5 class="ml-2"> Add Flight</h5>
                     </a>
                   </li>
+                  
                   <li class="nav-item">
-                    <a class="nav-link" href="all_flights.php">
+                    <a class="nav-link" href="list_flight.php">
                       <h5>List Flights</h5>
                     </a>
-                  </li>   
+                  </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="list_airlines.php">
-                      <h5>Manage Airlines</h5>
+                    <a class="nav-link" href="add_plane.php">
+                      <h5>add Plane</h5>
                     </a>
-                  </li>              
+                  </li>      
+                  
+                  <li class="nav-item">
+                    <a class="nav-link" href="list_planes.php">
+                      <h5>List of planes</h5>
+                    </a>
+                  </li>                     
                   <!-- <li class="nav-item">
                     <a class="nav-link" href="review.php">
                       <h4>Reviews</h4>

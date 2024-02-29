@@ -9,8 +9,8 @@ if(isset($_POST['flight_but']) and isset($_SESSION['adminId'])) {
     $dep_city = $_POST['dep_city'];
     $arr_city = $_POST['arr_city'];
     $price = $_POST['price'];
-    $air_id = $_POST['airline_name'];
-    $dura = $_POST['dura'];
+    $id_plane = $_POST['plane'];
+    $dura = $_POST['duration'];
 
     if($dep_city===$arr_city || $arr_city==='To' || $arr_city==='From') {
       header('Location: ../../admin/flight.php?error=same');
@@ -66,19 +66,19 @@ if(isset($_POST['flight_but']) and isset($_SESSION['adminId'])) {
       header('Location: ../../admin/flight.php?error=destless');
       exit();
     } else {
-      $sql = "SELECT * FROM Airline WHERE airline_id =?";
+      $sql = "SELECT * FROM plane WHERE id_plane =?";
       $stmt = mysqli_stmt_init($conn);
       mysqli_stmt_prepare($stmt,$sql);
-      mysqli_stmt_bind_param($stmt,'i',$air_id);            
+      mysqli_stmt_bind_param($stmt,'i',$id_plane);            
       mysqli_stmt_execute($stmt);      
       $result = mysqli_stmt_get_result($stmt);    
       mysqli_stmt_close($stmt);
       if($row = mysqli_fetch_assoc($result)) {
-        $seats = $row['seats'];
-        $airline_name = $row['name'];
+        
+        $id_plane = $row['Id_plane'];
         $sql = "INSERT INTO Flight(admin_id,arrivale,departure,Destination,source,
-          airline,Seats,duration,Price,status,issue) VALUES (?,?,?,
-          ?,?,?,?,?,?,'','')";
+          id_plane,duration,Price,status,issue) VALUES (?,?,?,
+          ?,?,?,?,?,'','')";
           
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt,$sql)) {
@@ -86,13 +86,15 @@ if(isset($_POST['flight_but']) and isset($_SESSION['adminId'])) {
           exit();          
         } else {      
           $admin_id = $_SESSION['adminId'];  
-          mysqli_stmt_bind_param($stmt,'isssssisi',$admin_id,$arrival,$departure,$arr_city
-            ,$dep_city,$airline_name,$seats,$dura,$price);            
+          mysqli_stmt_bind_param($stmt, 'sssssisi', $admin_id, $arrival, $departure, $arr_city, 
+           $dep_city, $id_plane, $dura, $price); 
+
+
           mysqli_stmt_execute($stmt); 
         }
         mysqli_stmt_close($stmt);
         mysqli_close($conn);
-        header('Location: ../../admin/flight.php?flight=success');
+        header('Location: ../../admin/list_flight.php?flight=success');
         exit();
       } else {
         header('Location: ../../admin/flight.php?error=sqlerr');

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 04 fév. 2024 à 21:20
+-- Généré le : mer. 28 fév. 2024 à 20:26
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -51,24 +51,7 @@ CREATE TABLE `airline` (
   `airline_id` int(11) NOT NULL,
   `name` varchar(20) NOT NULL,
   `seats` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Déchargement des données de la table `airline`
---
-
-INSERT INTO `airline` (`airline_id`, `name`, `seats`) VALUES
-(1, 'Core Airways', 165),
-(2, 'Echo Airline', 220),
-(3, 'Spark Airways', 125),
-(4, 'Peak Airways', 210),
-(5, 'Homelander Airways', 185),
-(9, 'Blue Airlines', 200),
-(10, 'GoldStar Airways', 205),
-(11, 'Novar Airways', 158),
-(12, 'Aero Airways', 210),
-(13, 'Nep Airways', 215),
-(14, 'Delta Airlines', 135);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -157,43 +140,38 @@ CREATE TABLE `flight` (
   `departure` datetime NOT NULL,
   `Destination` varchar(20) NOT NULL,
   `source` varchar(20) NOT NULL,
-  `airline` varchar(20) NOT NULL,
-  `Seats` varchar(110) NOT NULL,
   `duration` varchar(20) NOT NULL,
   `Price` int(11) NOT NULL,
   `status` varchar(6) DEFAULT NULL,
   `issue` varchar(50) DEFAULT NULL,
   `last_seat` varchar(5) DEFAULT '',
   `bus_seats` int(11) DEFAULT 20,
-  `last_bus_seat` varchar(5) DEFAULT ''
+  `last_bus_seat` varchar(5) DEFAULT '',
+  `id_plane` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Déchargement des données de la table `flight`
 --
 
-INSERT INTO `flight` (`flight_id`, `admin_id`, `arrivale`, `departure`, `Destination`, `source`, `airline`, `Seats`, `duration`, `Price`, `status`, `issue`, `last_seat`, `bus_seats`, `last_bus_seat`) VALUES
-(1, 1, '2022-06-30 10:03:00', '2022-06-30 09:01:00', 'Chicago', 'San', 'Core Airways', '63', '1', 175, '', '', '21B', 20, ''),
-(2, 1, '2022-07-05 11:15:00', '2022-07-05 10:05:00', 'Shiburn', 'Olisphis', 'Core Airways', '61', '1', 185, 'arr', '', '21D', 20, ''),
-(3, 1, '2022-07-05 12:13:00', '2022-07-05 10:13:00', 'Weling', 'Olisphis', 'Spark Airways', '123', '2', 205, 'arr', '', '21B', 20, ''),
-(4, 1, '2022-07-05 16:30:00', '2022-07-05 15:26:00', 'Weling', 'Shiburn', 'Echo Airline', '220', '1', 155, 'issue', '120', '', 20, ''),
-(5, 1, '2022-07-05 15:30:00', '2022-07-05 12:30:00', 'Chiby', 'Shiburn', 'Spark Airways', '125', '3', 326, '', '', '', 20, ''),
-(6, 1, '2022-07-05 17:55:00', '2022-07-05 15:30:00', 'Chiby', 'Weling', 'Spark Airways', '125', '2', 285, '', '', '', 20, ''),
-(7, 1, '2022-07-05 20:50:00', '2022-07-05 18:50:00', 'Odonhull', 'Chiby', 'Spark Airways', '125', '2', 265, '', '', '', 20, ''),
-(8, 1, '2022-07-06 00:55:00', '2022-07-05 17:00:00', 'Oyladnard', 'Odonhull', 'Homelander Airways', '183', '7', 615, 'arr', '', '21B', 20, ''),
-(9, 1, '2022-07-05 17:09:00', '2022-07-05 16:05:00', 'Chiby', 'Olisphis', 'Peak Airways', '210', '1', 155, '', '', '', 20, ''),
-(10, 1, '2022-07-06 13:10:00', '2022-07-06 11:05:00', 'Hegan', 'Shiburn', 'Core Airways', '165', '2', 200, '', '', '', 20, ''),
-(11, 1, '2022-07-05 19:10:00', '2022-07-05 18:05:00', 'Oriaridge', 'Flerough', 'Echo Airline', '220', '1', 165, '', '', '', 20, ''),
-(12, 1, '2022-07-05 21:10:00', '2022-07-05 19:05:00', 'Chicago', 'Yleigh', 'Peak Airways', '210', '2', 320, '', '', '', 20, ''),
-(13, 1, '2022-07-05 13:50:00', '2022-07-05 12:56:00', 'Olisphis', 'Chicago', 'Core Airways', '165', '1', 110, 'issue', '110', '', 20, ''),
-(14, 1, '2022-07-05 11:08:00', '2022-07-05 09:07:00', 'Oyladnard', 'San', 'Spark Airways', '125', '2', 195, 'issue', '120', '', 20, ''),
-(15, 1, '2022-07-05 10:10:00', '2022-07-05 08:10:00', 'Weling', 'Chicago', 'Peak Airways', '210', '2', 125, 'issue', '120', '', 20, ''),
-(16, 1, '2022-07-05 18:10:00', '2022-07-05 16:09:00', 'Flerough', 'San', 'Homelander Airways', '185', '2', 220, 'dep', '', '', 20, ''),
-(17, 1, '2022-07-05 17:10:00', '2022-07-05 16:10:00', 'San', 'Chiby', 'Echo Airline', '220', '1', 125, 'arr', '', '', 20, ''),
-(18, 1, '2022-07-05 19:15:00', '2022-07-05 16:12:00', 'San', 'Flerough', 'Core Airways', '165', '3', 275, 'dep', '', '', 20, ''),
-(19, 1, '2022-07-05 23:40:00', '2022-07-05 20:31:00', 'Shiburn', 'Oyladnard', 'Aero Airways', '210', '3', 295, '', '', '', 20, ''),
-(20, 1, '2022-07-05 23:58:00', '2022-07-05 22:14:00', 'Zhotrora', 'Trerdence', 'Aero Airways', '208', '1', 185, 'dep', '', '21B', 20, ''),
-(21, 1, '2022-07-06 10:14:00', '2022-07-05 23:15:00', 'Odonhull', 'Otiginia', 'Blue Airlines', '200', '11', 965, '', '', '', 20, '');
+INSERT INTO `flight` (`flight_id`, `admin_id`, `arrivale`, `departure`, `Destination`, `source`, `duration`, `Price`, `status`, `issue`, `last_seat`, `bus_seats`, `last_bus_seat`, `id_plane`) VALUES
+(1, 1, '2022-06-30 10:03:00', '2022-06-30 09:01:00', 'Chicago', 'San', '1', 175, '', '', '26A', 20, '', 1),
+(2, 1, '2022-07-05 11:15:00', '2022-07-05 10:05:00', 'Shiburn', 'Olisphis', '1', 185, 'arr', '', '21D', 20, '', 2),
+(3, 1, '2022-07-05 12:13:00', '2022-07-05 10:13:00', 'Weling', 'Olisphis', '2', 205, 'arr', '', '21B', 20, '', 3),
+(5, 1, '2022-07-05 15:30:00', '2022-07-05 12:30:00', 'Chiby', 'Shiburn', '3', 326, '', '', '', 20, '', NULL),
+(6, 1, '2022-07-05 17:55:00', '2022-07-05 15:30:00', 'Chiby', 'Weling', '2', 285, '', '', '', 20, '', NULL),
+(7, 1, '2022-07-05 20:50:00', '2022-07-05 18:50:00', 'Odonhull', 'Chiby', '2', 265, '', '', '', 20, '', NULL),
+(8, 1, '2022-07-06 00:55:00', '2022-07-05 17:00:00', 'Oyladnard', 'Odonhull', '7', 615, 'arr', '', '21B', 20, '', NULL),
+(9, 1, '2022-07-05 17:09:00', '2022-07-05 16:05:00', 'Chiby', 'Olisphis', '1', 155, '', '', '', 20, '', NULL),
+(10, 1, '2022-07-06 13:10:00', '2022-07-06 11:05:00', 'Hegan', 'Shiburn', '2', 200, '', '', '', 20, '', NULL),
+(11, 1, '2022-07-05 19:10:00', '2022-07-05 18:05:00', 'Oriaridge', 'Flerough', '1', 165, '', '', '', 20, '', NULL),
+(12, 1, '2022-07-05 21:10:00', '2022-07-05 19:05:00', 'Chicago', 'Yleigh', '2', 320, '', '', '', 20, '', NULL),
+(13, 1, '2022-07-05 13:50:00', '2022-07-05 12:56:00', 'Olisphis', 'Chicago', '1', 110, 'issue', '110', '', 20, '', NULL),
+(14, 1, '2022-07-05 11:08:00', '2022-07-05 09:07:00', 'Oyladnard', 'San', '2', 195, 'issue', '120', '', 20, '', NULL),
+(74, 1, '2024-05-12 10:00:00', '2024-04-12 12:00:00', 'Zhotrora', 'Zhotrora', '4', 0, '', '', '', 20, '', 4),
+(75, 1, '2024-02-04 20:31:00', '2024-02-02 20:31:00', 'Odonhull', 'Weling', '6', 1000, '', '', '', 20, '', 1),
+(76, 1, '2024-04-16 12:00:00', '2024-04-13 10:00:00', 'San Jose', 'Chicago', '4', 23998, '', '', '', 20, '', 1),
+(77, 1, '2025-05-12 11:00:00', '2025-04-24 10:00:00', 'Yleigh', 'Plueyby', '6', 2000, '', '', '', 20, '', 2);
 
 -- --------------------------------------------------------
 
@@ -211,18 +189,6 @@ CREATE TABLE `passenger_profile` (
   `m_name` varchar(20) DEFAULT NULL,
   `l_name` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Déchargement des données de la table `passenger_profile`
---
-
-INSERT INTO `passenger_profile` (`passenger_id`, `user_id`, `flight_id`, `mobile`, `dob`, `f_name`, `m_name`, `l_name`) VALUES
-(1, 1, 1, '2147483647', '1995-01-01 00:00:00', 'Christine', 'M', 'Moore'),
-(2, 2, 3, '2147483647', '1995-02-13 00:00:00', 'Henry', 'l', 'Stuart'),
-(3, 3, 2, '2147483647', '1994-06-21 00:00:00', 'Andre', 'J', 'Atkins'),
-(4, 4, 2, '2147483647', '1995-05-16 00:00:00', 'James', 'K', 'Harbuck'),
-(5, 2, 8, '7854444411', '1995-02-13 00:00:00', 'Henry', 'l', 'Stuart'),
-(6, 2, 20, '7412585555', '1995-02-13 00:00:00', 'Henry', 'l', 'Stuart');
 
 -- --------------------------------------------------------
 
@@ -243,12 +209,25 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`card_no`, `user_id`, `flight_id`, `expire_date`, `amount`) VALUES
-('1010555677851111', 4, 2, '10/26', 370),
-('1020445869651011', 2, 20, '12/25', 370),
-('1111888889897778', 2, 3, '12/25', 205),
-('1400565800004478', 2, 8, '12/25', 1230),
-('1458799990001450', 3, 2, '12/25', 185),
-('4204558500014587', 1, 1, '02/25', 350);
+('10002030499004', 5, 1, '02/02', 350),
+('102029933845', 5, 1, '12/6', 350),
+('11345678777761', 5, 1, '16/03', 350),
+('11728223030303', 5, 1, '06/06', 350),
+('15252676389950', 5, 1, '02/02', 350),
+('1627282020000', 5, 1, '16/02', 350),
+('2223939848577', 5, 1, '16/02', 350),
+('239405968686', 5, 1, '10/10', 350),
+('2828393930433', 5, 1, '12/03', 350),
+('2838394940409', 5, 1, '06/06', 350),
+('28839394848944', 5, 1, '03/04', 350),
+('3748489005333', 5, 1, '10/10', 350),
+('388490599393', 5, 1, '02/10', 350),
+('3894042290033', 5, 1, '02/10', 350),
+('393904040823999', 5, 1, '16/03', 350),
+('4747859850092', 5, 1, '02/02', 350),
+('4748484595505', 5, 1, '10/10', 350),
+('4849595038383', 5, 1, '02/02', 350),
+('49499500505578', 5, 1, '02/02', 350);
 
 -- --------------------------------------------------------
 
@@ -257,11 +236,26 @@ INSERT INTO `payment` (`card_no`, `user_id`, `flight_id`, `expire_date`, `amount
 --
 
 CREATE TABLE `plane` (
-  `Id_pl` int(11) NOT NULL,
   `autonomie` int(11) NOT NULL,
   `Nbr_place_tot` int(11) NOT NULL,
-  `Disponibilite` varchar(30) NOT NULL
+  `Disponibilite` varchar(30) NOT NULL,
+  `vitesse` float DEFAULT NULL,
+  `nom` varchar(255) DEFAULT NULL,
+  `Id_plane` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `plane`
+--
+
+INSERT INTO `plane` (`autonomie`, `Nbr_place_tot`, `Disponibilite`, `vitesse`, `nom`, `Id_plane`) VALUES
+(3000, 150, 'Available', NULL, 'Airbus A320', 1),
+(3500, 180, 'Available', NULL, 'Boeing 737', 2),
+(4000, 100, 'Available', NULL, ' Embraer E190', 3),
+(2500, 90, 'Available', NULL, 'Bombardier CRJ900', 4),
+(5436, 156, 'Available', NULL, 'Boeing 737-800W', 5),
+(6100, 150, 'Available', NULL, 'Airbus A320-200', 6),
+(446, 3300, 'Available', NULL, 'rasmaa', 8);
 
 -- --------------------------------------------------------
 
@@ -292,18 +286,6 @@ CREATE TABLE `ticket` (
   `cost` int(11) NOT NULL,
   `class` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Déchargement des données de la table `ticket`
---
-
-INSERT INTO `ticket` (`ticket_id`, `passenger_id`, `flight_id`, `user_id`, `seat_no`, `cost`, `class`) VALUES
-(1, 1, 1, 1, '21A', 350, 'E'),
-(2, 2, 3, 2, '21A', 205, 'E'),
-(4, 3, 2, 3, '21A', 185, 'E'),
-(6, 4, 2, 4, '21C', 370, 'E'),
-(8, 5, 8, 2, '21A', 1230, 'E'),
-(10, 6, 20, 2, '21A', 370, 'E');
 
 -- --------------------------------------------------------
 
@@ -336,7 +318,8 @@ INSERT INTO `users` (`user_id`, `username`, `email`, `password`) VALUES
 (1, 'christine', 'christine@mail.com', '$2y$10$KRXGkY.dxYjD8FLZclW/Tu04wl76lD7IA4Z3nAsxtpdZxHNbYo4ZW'),
 (2, 'henry', 'henry@mail.com', '$2y$10$KRXGkY.dxYjD8FLZclW/Tu04wl76lD7IA4Z3nAsxtpdZxHNbYo4ZW'),
 (3, 'andre', 'andre@mail.com', '$2y$10$KRXGkY.dxYjD8FLZclW/Tu04wl76lD7IA4Z3nAsxtpdZxHNbYo4ZW'),
-(4, 'james', 'james@mail.com', '$2y$10$KRXGkY.dxYjD8FLZclW/Tu04wl76lD7IA4Z3nAsxtpdZxHNbYo4ZW');
+(4, 'james', 'james@mail.com', '$2y$10$KRXGkY.dxYjD8FLZclW/Tu04wl76lD7IA4Z3nAsxtpdZxHNbYo4ZW'),
+(5, 'asmadjaib ', 'asmadjaib411@gmail.com', '$2y$10$H/h56Xak3q/efd7g9sQ1nOVhdA0HZAH2K.Nz/R9.6dqG7VbAyGwkC');
 
 --
 -- Index pour les tables déchargées
@@ -347,12 +330,6 @@ INSERT INTO `users` (`user_id`, `username`, `email`, `password`) VALUES
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`admin_id`);
-
---
--- Index pour la table `airline`
---
-ALTER TABLE `airline`
-  ADD PRIMARY KEY (`airline_id`);
 
 --
 -- Index pour la table `category`
@@ -377,15 +354,15 @@ ALTER TABLE `feedback`
 --
 ALTER TABLE `flight`
   ADD PRIMARY KEY (`flight_id`),
-  ADD KEY `admin_id` (`admin_id`);
+  ADD KEY `admin_id` (`admin_id`),
+  ADD KEY `fk_plane_id_1` (`id_plane`);
 
 --
 -- Index pour la table `passenger_profile`
 --
 ALTER TABLE `passenger_profile`
   ADD PRIMARY KEY (`passenger_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `flight_id` (`flight_id`);
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Index pour la table `payment`
@@ -399,7 +376,8 @@ ALTER TABLE `payment`
 -- Index pour la table `plane`
 --
 ALTER TABLE `plane`
-  ADD PRIMARY KEY (`Id_pl`);
+  ADD PRIMARY KEY (`Id_plane`),
+  ADD KEY `idx_plane_nom` (`nom`);
 
 --
 -- Index pour la table `pwdreset`
@@ -439,12 +417,6 @@ ALTER TABLE `admin`
   MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT pour la table `airline`
---
-ALTER TABLE `airline`
-  MODIFY `airline_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
 -- AUTO_INCREMENT pour la table `feedback`
 --
 ALTER TABLE `feedback`
@@ -454,13 +426,19 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT pour la table `flight`
 --
 ALTER TABLE `flight`
-  MODIFY `flight_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `flight_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT pour la table `passenger_profile`
 --
 ALTER TABLE `passenger_profile`
-  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT pour la table `plane`
+--
+ALTER TABLE `plane`
+  MODIFY `Id_plane` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `pwdreset`
@@ -472,13 +450,13 @@ ALTER TABLE `pwdreset`
 -- AUTO_INCREMENT pour la table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Contraintes pour les tables déchargées
@@ -488,6 +466,8 @@ ALTER TABLE `users`
 -- Contraintes pour la table `flight`
 --
 ALTER TABLE `flight`
+  ADD CONSTRAINT `fk_plane_id` FOREIGN KEY (`id_plane`) REFERENCES `plane` (`Id_plane`),
+  ADD CONSTRAINT `fk_plane_id_1` FOREIGN KEY (`id_plane`) REFERENCES `plane` (`Id_plane`),
   ADD CONSTRAINT `flight_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`admin_id`);
 
 --
@@ -510,10 +490,9 @@ ALTER TABLE `payment`
 ALTER TABLE `ticket`
   ADD CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
   ADD CONSTRAINT `ticket_ibfk_2` FOREIGN KEY (`flight_id`) REFERENCES `flight` (`flight_id`),
-  ADD CONSTRAINT `ticket_ibfk_3` FOREIGN KEY (`passenger_id`) REFERENCES `passenger_profile` (`passenger_id`) ;
+  ADD CONSTRAINT `ticket_ibfk_3` FOREIGN KEY (`passenger_id`) REFERENCES `passenger_profile` (`passenger_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-SELECT * FROM passenger_profile WHERE passenger_id = 'votre_passenger_id';
