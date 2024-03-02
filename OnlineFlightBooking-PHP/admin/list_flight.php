@@ -37,6 +37,7 @@ if(isset($_POST['del_flight']) && isset($_SESSION['adminId'])) {
                         <th scope="col">Durée</th>
                         <th scope="col">Prix</th>
                         <th scope="col">Avion</th>
+                        <th scope="col">distance</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -54,6 +55,7 @@ if(isset($_POST['del_flight']) && isset($_SESSION['adminId'])) {
                                 <td>".$row['duration']."</td>
                                 <td>".$row['Price']."</td>
                                 <td>".$row['plane_name']."</td>
+                                <td>".$row['distance']."</td>
                                 <td>
                                     <form action='list_flight.php' method='post' onsubmit='return confirmDelete()'>
                                         <input type='hidden' name='flight_id' value='".$row['flight_id']."'>
