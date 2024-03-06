@@ -38,15 +38,16 @@ if(isset($_POST['del_plane']) and isset($_SESSION['adminId'])) {
                 </thead>
                 <tbody>
                     <?php
-                    $sql = 'SELECT * FROM plane ORDER BY Id_plane ASC';
+                    $sql = 'SELECT p.*, IFNULL(f.Id_plane, 0) AS used FROM plane p LEFT JOIN flight f ON p.Id_plane = f.Id_plane ORDER BY p.Id_plane ASC';
                     $result = mysqli_query($conn, $sql);
                     while ($row = mysqli_fetch_assoc($result)) {
+                        $availability = $row['used'] ? 'Not Available' : 'Available';
                         echo "<tr class='text-center'>
                                 <td>".$row['Id_plane']."</td>
                                 <td>".$row['nom']."</td>
                                 <td>".$row['autonomie']."</td>
                                 <td>".$row['Nbr_place_tot']."</td>
-                                <td>".$row['Disponibilite']."</td>
+                                <td>".$availability."</td>
                                 <td>
                                     <form action='list_planes.php' method='post' onsubmit='return confirmDelete()'>
                                         <input type='hidden' name='Id_plane' value='".$row['Id_plane']."'>
@@ -66,6 +67,6 @@ if(isset($_POST['del_plane']) and isset($_SESSION['adminId'])) {
 
 <script>
     function confirmDelete() {
-        return confirm("Êtes-vous sûr de vouloir supprimer cet avion ?");
+        return confirm("Are you sure you want to delete this plane?");
     }
 </script>

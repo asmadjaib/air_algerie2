@@ -757,15 +757,7 @@ h1 {
 									<option value="E">Economy</option>  
 									<option value="B">Business</option>   
 								</select>
-								<div class="class">
-								<h3 style="color: rgba(255, 255, 255, 0.767);">Class</h3>
-								<select id="w3_country1" 
-									name="f_class" onchange="change_country(this.value)" class="frm-field required">
-									<option value="E">Economy</option>  
-									<option value="B">Business</option>   
-								</select>
 
-							</div>
 							</div>
 							<div class="clear"></div>
 							<div class="numofppl">

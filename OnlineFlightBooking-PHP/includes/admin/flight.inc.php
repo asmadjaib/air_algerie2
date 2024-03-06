@@ -14,7 +14,6 @@ if(isset($_POST['flight_but']) && isset($_SESSION['adminId'])) {
     $arr_city = $_POST['arr_city'];
     $price = $_POST['price'];
     $id_plane = $_POST['plane'];
-    $duration = $_POST['duration'];
 
     // Vérification des erreurs et validations des données
     if ($dep_city === $arr_city || $arr_city === 'To' || $arr_city === 'From') {
@@ -30,19 +29,19 @@ if(isset($_POST['flight_but']) && isset($_SESSION['adminId'])) {
         exit();
     }
 
-    // Récupération de l'autonomie de l'avion à partir de la base de données
-    $sql_autonomy = "SELECT autonomie FROM plane WHERE Id_plane = ?";
-    $stmt_autonomy = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt_autonomy, $sql_autonomy)) {
+    // Récupération de la vitesse de l'avion à partir de la base de données
+    $sql_speed = "SELECT vitesse FROM plane WHERE Id_plane = ?";
+    $stmt_speed = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt_speed, $sql_speed)) {
         header('Location: ../../admin/flight.php?error=sqlerr');
         exit();
     }
-    mysqli_stmt_bind_param($stmt_autonomy, 'i', $id_plane);
-    mysqli_stmt_execute($stmt_autonomy);
-    $result_autonomy = mysqli_stmt_get_result($stmt_autonomy);
-    $row_autonomy = mysqli_fetch_assoc($result_autonomy);
-    $autonomy = $row_autonomy['autonomie'];
-    mysqli_stmt_close($stmt_autonomy);
+    mysqli_stmt_bind_param($stmt_speed, 'i', $id_plane);
+    mysqli_stmt_execute($stmt_speed);
+    $result_speed = mysqli_stmt_get_result($stmt_speed);
+    $row_speed = mysqli_fetch_assoc($result_speed);
+    $speed = $row_speed['vitesse'];
+    mysqli_stmt_close($stmt_speed);
 
     // Récupération des coordonnées de latitude et de longitude des villes de départ et d'arrivée
     $dep_coordinates = getCoordinates($dep_city);
@@ -57,11 +56,10 @@ if(isset($_POST['flight_but']) && isset($_SESSION['adminId'])) {
         // Calcul de la distance entre les deux villes
         $distance = calculateDistance($dep_lat, $dep_lon, $arr_lat, $arr_lon);
 
-        // Vérification de l'autonomie de l'avion
-        if ($autonomy < $distance) {
-            header('Location: ../../admin/flight.php?error=autonomy');
-            exit();
-        }
+        // Calcul de la durée du vol en fonction de la distance et de la vitesse
+        $flight_duration_hours = floor($distance / $speed); // Partie entière des heures
+        $flight_duration_minutes = round((($distance / $speed) - $flight_duration_hours) * 60); // Partie entière des minutes
+        $flight_duration = $flight_duration_hours . 'h / ' . $flight_duration_minutes . ' min';
 
         // Insertion des données dans la base de données
         $sql_insert = "INSERT INTO flight (admin_id, departure, arrivale, source, Destination, duration, Price, id_plane, distance)
@@ -72,7 +70,7 @@ if(isset($_POST['flight_but']) && isset($_SESSION['adminId'])) {
             header('Location: ../../admin/flight.php?error=sqlerr');
             exit();
         }
-        mysqli_stmt_bind_param($stmt_insert, 'isssssddi', $admin_id, $dep_date_time, $arr_date_time, $dep_city, $arr_city, $duration, $price, $id_plane, $distance);
+        mysqli_stmt_bind_param($stmt_insert, 'isssssddi', $admin_id, $dep_date_time, $arr_date_time, $dep_city, $arr_city, $flight_duration, $price, $id_plane, $distance);
 
         mysqli_stmt_execute($stmt_insert);
         mysqli_stmt_close($stmt_insert);

@@ -20,6 +20,8 @@
                     echo "<div class='alert alert-danger' role='alert'>Same city specified in source and destination</div>";
                 } else if($_GET['error'] === 'autonomy') {
                     echo "<div class='alert alert-danger' role='alert'>The autonomy of the selected plane is insufficient for the distance to be traveled</div>";
+                } else if($_GET['error'] === 'planeinflight') {
+                    echo "<div class='alert alert-danger' role='alert'>The selected plane is already in flight at the scheduled departure time</div>";
                 }
             }
             ?>
@@ -96,12 +98,12 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group row">
+                   <!-- <div class="form-group row">
                         <label for="duration" class="col-sm-4 col-form-label">Duration</label>
                         <div class="col-sm-8">
                             <input type="text" name="duration" id="duration" class="form-control" required>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="form-group row">
                         <label for="price" class="col-sm-4 col-form-label">Price</label>
                         <div class="col-sm-8">
